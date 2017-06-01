@@ -13,7 +13,7 @@ use self::amcl::rom::{
 use self::amcl::ecp::ECP;
 use self::amcl::ecp2::ECP2;
 use self::amcl::fp2::FP2;
-use self::amcl::pair::{ate, g1mul, g2mul, gtpow};
+use self::amcl::pair::{ate, g1mul, g2mul, gtpow, fexp};
 use self::amcl::rand::RAND;
 
 extern crate rand;
@@ -60,10 +60,12 @@ fn main() {
     // Calculating left part
     let mut p = g1mul(&mut gen_g1, &mut a);
     let mut q = g2mul(&mut gen_g2, &mut b);
-    let left = ate(&mut q, &mut p);
+    let mut left = ate(&mut q, &mut p);
+    left = fexp(&left);
 
     // Calculating right part
     let mut right = ate(&mut gen_g2, &mut gen_g1);
+    right = fexp(&right);
     let mut ab = BIG::modmul(&mut a, &mut b, &group_order);
     println!("{0: <10}: {1:?}", "a * b", ab);
     right = gtpow(&mut right, &mut ab);
