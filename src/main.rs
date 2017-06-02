@@ -128,11 +128,11 @@ fn main() {
     println!("{0: <10}: {1:?}", "pair2", pair2);
 
     let mut result = pair1;
-    result.smul(&mut pair2);
+    result.mul(&mut pair2);
     println!("{0: <10}: {1:?}", "result", result);
 
     pair1.inverse();
-    result.smul(&mut pair1);
+    result.mul(&mut pair1);
     println!("{0: <10}: {1:?}", "result", result);
 
     /// doesn't work
