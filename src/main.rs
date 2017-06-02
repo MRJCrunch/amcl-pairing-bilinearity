@@ -134,7 +134,7 @@ fn main() {
     pair1.inverse();
     result.mul(&mut pair1);
     println!("{0: <10}: {1:?}", "result", result);
-
-    /// doesn't work
+    
+    pair2.reduce(); result.reduce();
     assert_eq!(pair2, result);
 }
